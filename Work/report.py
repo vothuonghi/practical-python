@@ -14,13 +14,14 @@ def read_portfolio(filename):
         headers = next(rows)
 
         for row in rows:
-            holding = {
-                'name': row[0],
-                'shares': int(row[1]),
-                'price': float(row[2])
+            record = dict(zip(headers, row))
+            stock = {
+                'name': record['name'],
+                'shares': int(record['shares']),
+                'price': float(record['price'])
             }
 
-            portfolio.append(holding)
+            portfolio.append(stock)
 
     return portfolio
 
@@ -62,7 +63,7 @@ headers = ('Name', 'Shares', 'Price', 'Changes')
 print(f"{headers[0]:10s} {headers[1]:>10s} {headers[2]:>10s} {headers[3]:>10s}")
 print(('-'*10 + ' ')*len(headers))
 for row in report:  
-    print(f"{row[0]:10s} {row[1]:>10d} {row[2]:>10.2f}  {row[3]:>10.2f}")
+    print(f"{row[0]:10s} {row[1]:>10d} {row[2]:>10.2f} {row[3]:>10.2f}")
 
 
 
